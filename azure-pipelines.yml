@@ -38,6 +38,7 @@ stages:
         packageType: 'sdk'
         version: '6.0.x'
         includePreviewVersions: true
+
     - task: DotNetCoreCLI@2
       displayName: Build function
       inputs:
@@ -45,6 +46,13 @@ stages:
         projects: |
           $(workingDirectory)/*.csproj
         arguments: --output $(System.DefaultWorkingDirectory)/publish_output --configuration $(buildConfiguration)
+
+    - task: DotNetCoreCLI@2
+      displayName: 'Unit tests'
+      inputs:
+        command: test
+        projects: '**/*.Tests.csproj'
+        arguments: '--configuration $(buildConfiguration) --collect "Code coverage"'
 
     - task: ArchiveFiles@2
       displayName: 'Archive files'

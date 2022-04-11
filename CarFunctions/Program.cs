@@ -19,6 +19,7 @@ namespace CarFunctions
                 })
                 .ConfigureServices(services =>
                 {
+                    services.AddTransient<ICarRepo, CarRepo>();
                     services.AddTransient<ICarService, CarService>();
                 })
                 .Build();

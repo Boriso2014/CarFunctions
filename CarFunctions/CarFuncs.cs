@@ -1,5 +1,7 @@
 using System;
 using System.Net;
+using System.Text;
+using System.Text.Json;
 using System.Threading.Tasks;
 
 using Microsoft.Azure.Functions.Worker;
@@ -26,9 +28,11 @@ namespace CarFunctions
 
             var carId = new Guid(id); // fda8d667-f43c-4d49-afae-624b7caf0bd3
             var car = _carService.GetCar(carId);
+            var json = JsonSerializer.Serialize(car);
 
             var response = req.CreateResponse(HttpStatusCode.OK);
-            await response.WriteAsJsonAsync(car);
+            response.Headers.Add("Content-Type", "application/json");
+            await response.WriteStringAsync(json, Encoding.UTF8);
 
             return response;
         }

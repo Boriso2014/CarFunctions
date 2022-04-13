@@ -12,19 +12,22 @@ namespace CarFunctions
             var host = new HostBuilder()
                 .ConfigureFunctionsWorkerDefaults(builder =>
                 {
+                    builder.UseMiddleware<ExceptionMiddleware>();
                     builder.Services.Configure<JsonSerializerOptions>(options =>
                     {
                         options.PropertyNamingPolicy = JsonNamingPolicy.CamelCase;
                     });
                 })
-                .ConfigureServices(services =>
-                {
-                    services.AddTransient<ICarRepo, CarRepo>();
-                    services.AddTransient<ICarService, CarService>();
-                })
+                .ConfigureServices(services => ConfigureServices(services))
                 .Build();
 
             host.Run();
+        }
+
+        private static void ConfigureServices(IServiceCollection services)
+        {
+            services.AddTransient<ICarRepo, CarRepo>();
+            services.AddTransient<ICarService, CarService>();
         }
     }
 }

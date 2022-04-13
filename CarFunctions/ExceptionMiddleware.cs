@@ -25,7 +25,7 @@ namespace CarFunctions
             catch (Exception ex)
             {
                 _logger.LogError("Unexpected Error in {EntryPoint}: {Message}", context.FunctionDefinition.EntryPoint, ex.Message);
-                throw;
+                //throw;
             }
         }
     }

@@ -22,11 +22,21 @@ namespace CarFunctions
             {
                 await next(context);
             }
+            catch (AggregateException aex)
+            {
+                _logger.LogError("Unexpected Error in {EntryPoint}", context.FunctionDefinition.EntryPoint);
+                foreach (var ex in aex.InnerExceptions)
+                {
+                    _logger.LogError("Request failed:{NewLine}{Message}", Environment.NewLine, ex.Message);
+                }
+                throw;
+            }
             catch (Exception ex)
             {
                 _logger.LogError("Unexpected Error in {EntryPoint}: {Message}", context.FunctionDefinition.EntryPoint, ex.Message);
-                //throw;
+                throw;
             }
         }
     }
 }
+

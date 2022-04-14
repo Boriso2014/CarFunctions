@@ -12,7 +12,7 @@ namespace CarFunctions
             var host = new HostBuilder()
                 .ConfigureFunctionsWorkerDefaults(builder =>
                 {
-                    builder.UseMiddleware<ExceptionMiddleware>();
+                    builder.UseExceptionHandling();
                     builder.Services.Configure<JsonSerializerOptions>(options =>
                     {
                         options.PropertyNamingPolicy = JsonNamingPolicy.CamelCase;

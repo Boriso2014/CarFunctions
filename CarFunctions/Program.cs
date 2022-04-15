@@ -1,5 +1,7 @@
 using System.Text.Json;
 
+using CarFunctions.Infrastructure;
+
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 

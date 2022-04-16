@@ -59,7 +59,7 @@ namespace CarFunctions.Tests
             var carId = "fda8d667-f43c-4d49-afae-624b7caf0bd3";
 
             // Act
-            var result = await func.RunGetCar(request, carId);
+            var result = await func.GetCar(request, carId);
 
             result.Body.Position = 0;
             var reader = new StreamReader(result.Body);

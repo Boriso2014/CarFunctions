@@ -24,7 +24,7 @@ namespace CarFunctions
         [Function("GetCar")]
         public async Task<HttpResponseData> GetCar([HttpTrigger(AuthorizationLevel.Anonymous, "get", Route = "cars/{id}")] HttpRequestData req, string id)
         {
-            _logger.LogInformation("C# GetCar function is starting by HTTP trigger");
+            _logger.LogInformation("C# GetCar function is starting by HTTP trigger.");
 
             var carId = new Guid(id); // fda8d667-f43c-4d49-afae-624b7caf0bd3
             var car = _carService.GetCar(carId);
